@@ -1,0 +1,28 @@
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+	<parameters>
+        <parameter key="proxa_listing_article_variants.view_dir">%proxa_listing_article_variants.plugin_dir%/Resources/views</parameter>
+    </parameters>
+	<services>
+
+		<service
+				id="proxa_listing_article_variants.services.list_product_service"
+				class="ProxaListingArticleVariants\Services\ListProductService"
+				decorates="shopware_storefront.list_product_service"
+				public="false"
+		>
+			<argument type="service" id="proxa_listing_article_variants.services.list_product_service.inner" />
+			<argument type="service" id="shopware_storefront.configurator_service"/>
+		</service>
+				
+		<service id="proxa_listing_article_variants.subscriber.frontend" class="ProxaListingArticleVariants\Subscriber\Frontend">
+		    <argument type="service" id="service_container" />
+			<argument type="service" id="shopware_storefront.context_service" />
+			<argument type="service" id="shopware_storefront.configurator_service" />
+			<argument type="service" id="legacy_struct_converter" />
+		    <argument type="string">%proxa_listing_article_variants.view_dir%</argument>
+		    <tag name="shopware.event_subscriber" />
+		</service>
+		
+		
+	</services>
+</container>

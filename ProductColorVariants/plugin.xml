@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
+
+    <label lang="en">Product color variants in listing</label>
+    <label lang="de">Product color variants in listing</label>
+
+    <version>1.0.0</version>
+
+    <copyright>Copyright ©  2017. ZilTech LLC.</copyright>
+    <license>proprietary</license>
+    <link>http://zil.tech</link>
+    <author>ZilTech LLC.</author>
+    <support>support@zil.tech</support>
+
+    <compatibility minVersion="5.2.0" />
+
+    <changelog version="1.0.0">
+        <changes lang="en">Initial Version</changes>
+        <changes lang="de">Initiale Version</changes>
+    </changelog>
+
+</plugin>

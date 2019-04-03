@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!-- Frontend Subscriber -->
+        <service id="product_color_variants.subscriber.frontend"
+                 class="ProductColorVariants\Subscriber\Frontend">
+    
+            <argument type="service" id="service_container" />
+    
+            <argument type="string">%product_color_variants.plugin_dir%</argument>
+            <argument type="string">%product_color_variants.view_dir%</argument>
+    
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+
+        <!-- Services ListProductService -->
+        <service
+                id="product_color_variant.services.list_product_service"
+                class="ProductColorVariants\Services\ListProductService"
+                decorates="shopware_storefront.list_product_service"
+                public="false"
+        >
+            <argument type="service" id="service_container" />
+            <argument type="service" id="shopware_storefront.list_product_gateway"/>
+            <argument type="service" id="shopware_storefront.graduated_prices_service"/>
+            <argument type="service" id="shopware_storefront.cheapest_price_service"/>
+            <argument type="service" id="shopware_storefront.price_calculation_service"/>
+            <argument type="service" id="shopware_storefront.media_service"/>
+            <argument type="service" id="shopware_storefront.marketing_service"/>
+            <argument type="service" id="shopware_storefront.vote_service"/>
+            <argument type="service" id="shopware_storefront.category_service" />
+            <argument type="service" id="config" />
+            <argument type="service" id="shopware_storefront.additional_text_service"/>
+
+        </service>
+
+    </services>
+
+</container>

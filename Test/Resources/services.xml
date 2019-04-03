@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!-- Frontend Subscriber -->
+        <service id="test.subscriber.frontend"
+                 class="Test\Subscriber\Frontend">
+            <argument type="service" id="service_container"/>
+            <argument type="string">%test.plugin_dir%</argument>
+            <argument type="string">%test.view_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <!-- BarCodeService -->
+        <service
+                id="test.bar_code_service"
+                class="Test\Bundle\phpBarCodeGeneratorMaster\Service\BarCodeGeneratorService">
+            <argument type="service" id="service_container"/>
+        </service>
+
+        <!-- AttributeService -->
+        <service
+                id="test.attribute_service"
+                class="Test\Bundle\AttributeService\Attribute">
+            <argument type="service" id="service_container"/>
+        </service>
+
+    </services>
+
+</container>
