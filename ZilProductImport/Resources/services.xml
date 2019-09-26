@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!-- Backend Subscriber -->
+        <service id="zil_product_import.subscriber.backend"
+                 class="ZilProductImport\Subscriber\Backend">
+    
+            <argument type="service" id="service_container" />
+    
+            <argument type="string">%zil_product_import.plugin_dir%</argument>
+            <argument type="string">%zil_product_import.view_dir%</argument>
+    
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+        <!-- Frontend Subscriber -->
+        <service id="zil_product_import.subscriber.frontend"
+                 class="ZilProductImport\Subscriber\Frontend">
+    
+            <argument type="service" id="service_container" />
+            <argument type="string">%zil_product_import.plugin_dir%</argument>
+            <argument type="string">%zil_product_import.view_dir%</argument>
+    
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+        <!-- ValidationTypesService -->
+        <service id="zil_product_import.services.ValidationTypesService" class="ZilProductImport\Services\Validation\ValidationTypesService">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <!-- CsvValidationService -->
+        <service id="zil_product_import.services.CsvValidationService" class="ZilProductImport\Services\Validation\CsvValidationService">
+            <argument type="service" id="service_container" />
+            <argument type="service" id="zil_product_import.services.FilesService" />
+            <argument type="service" id="zil_product_import.services.ValidationTypesService" />
+            <argument type="string">%zil_product_import.plugin_dir%</argument>
+        </service>
+
+        <!-- PackageValidation -->
+        <service id="zil_product_import.services.PackageValidation" class="ZilProductImport\Services\Validation\PackageValidation">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <!-- FilesService -->
+        <service id="zil_product_import.services.FilesService" class="ZilProductImport\Services\Files\FilesService">
+            <argument type="service" id="service_container" />
+            <argument type="string">%zil_product_import.plugin_dir%</argument>
+        </service>
+
+        <!-- ProductImport -->
+        <service id="zil_product_import.services.ProductImport" class="ZilProductImport\Services\ProductImport\ProductImport">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <!-- Insert -->
+        <service id="zil_product_import.services.Insert" class="ZilProductImport\Services\InsertData\Insert">
+            <argument type="service" id="service_container" />
+            <argument type="string">%zil_product_import.plugin_dir%</argument>
+        </service>
+
+        <!-- Compare -->
+        <service id="zil_product_import.services.Compare" class="ZilProductImport\Services\Compare\Compare">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <!-- Upload -->
+        <service id="zil_product_import.services.Upload" class="ZilProductImport\Services\Upload\Upload">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <!-- Package -->
+        <service id="zil_product_import.services.Package" class="ZilProductImport\Services\Package\Package">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <!-- Category -->
+        <service id="zil_product_import.services.Category" class="ZilProductImport\Services\Category\Category">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <!-- Media -->
+        <service id="zil_product_import.services.Media" class="ZilProductImport\Services\Media\Media">
+            <argument type="service" id="service_container" />
+            <argument type="string">%zil_product_import.plugin_dir%</argument>
+        </service>
+
+        <!-- ForceEncodingService -->
+        <service id="zil_product_import.services.ForceEncodingService" class="ZilProductImport\Services\ForceEncodingService">
+        </service>
+
+    </services>
+
+</container>
